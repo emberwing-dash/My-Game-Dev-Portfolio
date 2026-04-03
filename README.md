@@ -1,2 +1,2 @@
-# My Game Dev Portfolio
-gamedev portfolio
+# My-Game-Dev-Portfolio
+portfolio of my game development profile

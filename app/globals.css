@@ -1,0 +1,167 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Gaming dark theme with neon accents */
+  --background: oklch(0.08 0.02 270);
+  --foreground: oklch(0.95 0.01 270);
+  --card: oklch(0.12 0.02 270);
+  --card-foreground: oklch(0.95 0.01 270);
+  --popover: oklch(0.1 0.02 270);
+  --popover-foreground: oklch(0.95 0.01 270);
+  --primary: oklch(0.7 0.2 270);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.15 0.02 270);
+  --secondary-foreground: oklch(0.9 0.01 270);
+  --muted: oklch(0.18 0.02 270);
+  --muted-foreground: oklch(0.65 0.02 270);
+  --accent: oklch(0.65 0.25 180);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.03 270);
+  --input: oklch(0.15 0.02 270);
+  --ring: oklch(0.7 0.2 270);
+  --chart-1: oklch(0.7 0.2 270);
+  --chart-2: oklch(0.65 0.25 180);
+  --chart-3: oklch(0.7 0.22 145);
+  --chart-4: oklch(0.75 0.18 60);
+  --chart-5: oklch(0.6 0.2 330);
+  --radius: 0.75rem;
+  
+  /* Gaming-specific colors */
+  --neon-blue: oklch(0.7 0.2 270);
+  --neon-cyan: oklch(0.75 0.15 195);
+  --neon-green: oklch(0.7 0.22 145);
+  --neon-purple: oklch(0.6 0.25 300);
+  --glow-blue: oklch(0.7 0.2 270 / 0.5);
+  --glow-cyan: oklch(0.75 0.15 195 / 0.5);
+  --glow-green: oklch(0.7 0.22 145 / 0.5);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-neon-blue: var(--neon-blue);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-green: var(--neon-green);
+  --color-neon-purple: var(--neon-purple);
+  --color-glow-blue: var(--glow-blue);
+  --color-glow-cyan: var(--glow-cyan);
+  --color-glow-green: var(--glow-green);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .neon-glow-blue {
+    box-shadow: 0 0 5px var(--neon-blue), 0 0 20px var(--glow-blue), 0 0 40px var(--glow-blue);
+  }
+  
+  .neon-glow-cyan {
+    box-shadow: 0 0 5px var(--neon-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
+  }
+  
+  .neon-glow-green {
+    box-shadow: 0 0 5px var(--neon-green), 0 0 20px var(--glow-green), 0 0 40px var(--glow-green);
+  }
+  
+  .text-glow-blue {
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--glow-blue);
+  }
+  
+  .text-glow-cyan {
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--glow-cyan);
+  }
+  
+  .text-glow-green {
+    text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--glow-green);
+  }
+  
+  .scanline {
+    background: linear-gradient(
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+  
+  .glitch {
+    animation: glitch 2s infinite;
+  }
+  
+  @keyframes glitch {
+    0%, 90%, 100% {
+      transform: translate(0);
+    }
+    92% {
+      transform: translate(-2px, 1px);
+    }
+    94% {
+      transform: translate(2px, -1px);
+    }
+    96% {
+      transform: translate(-1px, 2px);
+    }
+    98% {
+      transform: translate(1px, -2px);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.8;
+      filter: brightness(1.2);
+    }
+  }
+}
