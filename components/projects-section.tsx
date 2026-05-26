@@ -27,8 +27,8 @@ const projects: Project[] = [
   { id: "vr1", title: "Crimson Valor", description: "First-person open world adventure game in the land of sword.", category: "vr", tags: ["Unity", "VR SDK", "C#"], playUrl: "https://codebreaker0.itch.io/crimson-valor", githubUrl: "https://github.com/emberwing-dash/Crimson-Valor", featured: true, imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vr1-Q9yg7pp67GDTHTqlzVytIKPmyCsqC2.png" },
   { id: "vr2", title: "Lumora", description: "An immersive learning environment for various subjects.", category: "vr", tags: ["Unity", "VR SDK", "Education"], playUrl: "https://rishav-goswami.itch.io/lumora", githubUrl: "https://github.com/emberwing-dash/Lumora", imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vr2-XxC6e1u4BDhuij170NYzIU57NdfE7d.jpg" },
   // AR Projects
-  { id: "ar1", title: "Train Simulation", description: "Simulation train in AR world.", category: "ar", tags: ["Unity", "AR Core", "C#"], featured: true, imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ar1-tAEwrSoQwzSMOvkbrNjEsuGdSs4jFI.png" },
-  { id: "ar2", title: "AR Play", description: "Interactive objects and characters in augmented reality.", category: "ar", tags: ["Unity", "AR Foundation", "Interactive"], imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ar2-PwfRlpGxy50I35vytTXpU2DuCXVOrz.png" },
+  { id: "ar1", title: "Train Simulation", description: "Simulation train in AR world.", category: "ar", tags: ["Unity", "AR Core", "C#"], githubUrl: "https://github.com/emberwing-dash/Ticket-Queue-AR-Vuforia", featured: true, imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ar1-tAEwrSoQwzSMOvkbrNjEsuGdSs4jFI.png" },
+  { id: "ar2", title: "AR Play", description: "Interactive objects and characters in augmented reality.", category: "ar", tags: ["Unity", "AR Foundation", "Interactive"], playUrl: "https://youtu.be/qepfFvXlcjc?si=-veSNpEdpM7OSg-p", githubUrl: "https://github.com/emberwing-dash/AR-filming", imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ar2-PwfRlpGxy50I35vytTXpU2DuCXVOrz.png" },
   // 3D Projects
   { id: "3d1", title: "Dani's Milky Adventure", description: "MILK = STRONG BONES", category: "3d", tags: ["Unity", "C#", "Adventure"], playUrl: "https://phoenixriderdev.itch.io/danis-milky-adventure", githubUrl: "https://github.com/PhoenixRider8/Dani-s-Milky-Adventure", featured: true, imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3d_1-KyejWKnpG3R5doYgnQfaMqQlszwQ0p.png" },
   { id: "3d2", title: "Inferno Overdrive", description: "First person shooter game where you kill infernals.", category: "3d", tags: ["Unity", "FPS", "Action"], playUrl: "https://phoenixriderdev.itch.io/inferno-overdrive", githubUrl: "https://github.com/PhoenixRider8/Inferno-Overdrive", imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3d_2-04mF39TselDRn1FEIKY0IKp3hvWYbY.png" },
@@ -95,7 +95,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90" asChild>
                 <a href={project.playUrl} target="_blank" rel="noopener noreferrer">
                   <Play className="w-4 h-4 mr-1" />
-                  Play
+                  {project.playUrl.includes("youtu") ? "Watch" : "Play"}
                 </a>
               </Button>
             )}

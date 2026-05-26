@@ -32,18 +32,26 @@ export function ContactSection() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const target = e.target as HTMLFormElement
+    const name = (target.elements.namedItem("name") as HTMLInputElement).value
+    const message = (target.elements.namedItem("message") as HTMLTextAreaElement).value
+    
+    const subject = encodeURIComponent(`Portfolio Quest Contact from ${name}`)
+    const body = encodeURIComponent(message)
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=goswamirishav520@gmail.com&su=${subject}&body=${body}`
+    
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer')
     
     setIsSubmitting(false)
     setSubmitted(true)
     
     // Reset after showing success
-    setTimeout(() => setSubmitted(false), 3000)
+    setTimeout(() => setSubmitted(false), 4000)
   }
 
   return (
@@ -91,6 +99,7 @@ export function ContactSection() {
                       <Label htmlFor="name">Your Name</Label>
                       <Input
                         id="name"
+                        name="name"
                         placeholder="Enter your name"
                         className="bg-muted/50 border-border focus:border-primary"
                         required
@@ -101,6 +110,7 @@ export function ContactSection() {
                       <Label htmlFor="email">Email Address</Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="your@email.com"
                         className="bg-muted/50 border-border focus:border-primary"
@@ -112,6 +122,7 @@ export function ContactSection() {
                       <Label htmlFor="message">Message</Label>
                       <Textarea
                         id="message"
+                        name="message"
                         placeholder="Tell me about your project or just say hi!"
                         className="bg-muted/50 border-border focus:border-primary min-h-[120px] resize-none"
                         required
@@ -149,7 +160,9 @@ export function ContactSection() {
                 <h3 className="text-xl font-bold mb-4">Quick Contact</h3>
                 <div className="space-y-4">
                   <a 
-                    href="mailto:gamedev@example.com" 
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=goswamirishav520@gmail.com" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all group"
                   >
                     <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
@@ -157,11 +170,11 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-mono text-foreground group-hover:text-primary transition-colors">gamedev@example.com</p>
+                      <p className="font-mono text-foreground group-hover:text-primary transition-colors">goswamirishav520@gmail.com</p>
                     </div>
                   </a>
                   <a 
-                    href="tel:+1234567890" 
+                    href="tel:+918638556147" 
                     className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all group"
                   >
                     <div className="w-10 h-10 rounded-lg bg-neon-cyan/20 flex items-center justify-center group-hover:bg-neon-cyan/30 transition-colors">
@@ -169,7 +182,7 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Phone</p>
-                      <p className="font-mono text-foreground group-hover:text-neon-cyan transition-colors">+1 (234) 567-890</p>
+                      <p className="font-mono text-foreground group-hover:text-neon-cyan transition-colors">+91 8638556147</p>
                     </div>
                   </a>
                 </div>
@@ -182,7 +195,7 @@ export function ContactSection() {
                 <h3 className="text-xl font-bold mb-4">Connect With Me</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <a 
-                    href="https://github.com" 
+                    href="https://github.com/emberwing-dash" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-4 rounded-lg bg-muted/30 hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all group"
@@ -194,7 +207,7 @@ export function ContactSection() {
                     </div>
                   </a>
                   <a 
-                    href="https://linkedin.com" 
+                    href="https://www.linkedin.com/in/rishav-goswami-279789354/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-4 rounded-lg bg-muted/30 hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all group"

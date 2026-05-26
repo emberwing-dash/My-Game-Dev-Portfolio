@@ -3,15 +3,16 @@
 import { useEffect, useRef, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { User, GraduationCap, Code, Sparkles } from "lucide-react"
+import { User, GraduationCap, Code, Sparkles, FileText } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const skills = [
-  { name: "Unity", level: 100, color: "primary" },
-  { name: "Unreal Engine", level: 30, color: "neon-cyan" },
-  { name: "Python", level: 80, color: "neon-green" },
-  { name: "C++", level: 70, color: "primary" },
-  { name: "Blender", level: 80, color: "neon-cyan" },
-  { name: "AR/VR Development", level: 100, color: "neon-green" },
+  { name: "Unity", level: 100, tier: "Advanced", color: "primary" },
+  { name: "Unreal Engine", level: 30, tier: "Beginner", color: "neon-cyan" },
+  { name: "Python", level: 80, tier: "Intermediate", color: "neon-green" },
+  { name: "C++", level: 70, tier: "Intermediate", color: "primary" },
+  { name: "Blender", level: 80, tier: "Intermediate", color: "neon-cyan" },
+  { name: "AR/VR Development", level: 100, tier: "Advanced", color: "neon-green" },
 ]
 
 const technologies = [
@@ -91,16 +92,36 @@ export function AboutSection() {
 
               {/* Info */}
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold mb-2">Game Developer</h3>
+                <h3 className="text-2xl font-bold mb-2">Full Stack Developer & Game Developer</h3>
                 <div className="flex items-center justify-center gap-2 text-muted-foreground mb-4">
                   <GraduationCap className="w-4 h-4" />
                   <span className="text-sm">SRMIST KTR</span>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Passionate game developer specializing in creating immersive experiences 
-                  across multiple platforms. From 2D mobile games to full VR experiences, 
-                  I bring ideas to life through code and creativity.
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Full-stack developer and game developer with experience in building immersive VR applications, AI-powered systems, and interactive web applications. Skilled in backend integration, computer vision, and real-time application development using Python, Unity, and modern development tools.
+                  <br /><br />
+                  Passionate about exploring emerging technologies including Cyber Security, AI, VR/AR, and game development. Strong interest in creating innovative digital experiences that combine creativity with technical problem-solving.
                 </p>
+
+                {/* CGPA & Resume Button */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-card/60 border border-primary/20 rounded-lg font-mono text-sm">
+                    <span className="text-muted-foreground">CGPA:</span>
+                    <span className="text-primary font-bold text-glow-blue">9.1</span>
+                  </div>
+                  <Button 
+                    className="group relative overflow-hidden bg-transparent border border-primary/50 hover:border-primary text-primary font-mono w-full sm:w-auto"
+                    asChild
+                  >
+                    <a href="https://drive.google.com/file/d/1QNeGbrG0-Eeo6sZveA1AXeb2yherH_GP/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <FileText className="w-4 h-4 text-primary group-hover:text-neon-cyan transition-colors" />
+                        View Resume
+                      </span>
+                      <span className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  </Button>
+                </div>
               </div>
 
               {/* Achievement badges */}
@@ -130,30 +151,22 @@ export function AboutSection() {
               {/* Skill bars */}
               <div className="space-y-4 mb-8">
                 {skills.map((skill, i) => (
-                  <div key={skill.name} className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="font-mono">{skill.name}</span>
-                      <span className="text-muted-foreground">{skill.level}/100</span>
-                    </div>
-                    <div className="h-3 bg-muted rounded-full overflow-hidden relative">
-                      <div 
-                        className={`h-full rounded-full transition-all duration-1000 ease-out ${
-                          skill.color === "primary" ? "bg-gradient-to-r from-primary to-primary/70" :
-                          skill.color === "neon-cyan" ? "bg-gradient-to-r from-neon-cyan to-neon-cyan/70" :
-                          "bg-gradient-to-r from-neon-green to-neon-green/70"
-                        }`}
-                        style={{ 
-                          width: isVisible ? `${skill.level}%` : "0%",
-                          transitionDelay: `${i * 100}ms`
-                        }}
-                      />
-                      {/* XP markers */}
-                      <div className="absolute inset-0 flex">
-                        {[...Array(10)].map((_, j) => (
-                          <div key={j} className="flex-1 border-r border-background/30 last:border-0" />
-                        ))}
-                      </div>
-                    </div>
+                  <div 
+                    key={skill.name} 
+                    className="flex justify-between items-center p-3 rounded-lg bg-muted/30 border border-border/50 hover:border-primary/30 transition-all duration-300"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  >
+                    <span className="font-mono font-semibold text-foreground text-sm">{skill.name}</span>
+                    <Badge 
+                      variant="secondary" 
+                      className={`font-mono text-xs ${
+                        skill.tier === "Advanced" ? "bg-neon-green/20 text-neon-green border-neon-green/30" :
+                        skill.tier === "Intermediate" ? "bg-neon-cyan/20 text-neon-cyan border-neon-cyan/30" :
+                        "bg-primary/20 text-primary border-primary/30"
+                      } border`}
+                    >
+                      {skill.tier}
+                    </Badge>
                   </div>
                 ))}
               </div>

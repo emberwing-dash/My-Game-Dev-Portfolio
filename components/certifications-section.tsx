@@ -8,51 +8,43 @@ import { Award, Trophy, Star, CheckCircle } from "lucide-react"
 const certifications = [
   {
     id: 1,
-    title: "Unity Certified Developer",
+    title: "Unity Junior Programmer",
     issuer: "Unity Technologies",
-    description: "Professional certification for Unity game development expertise.",
+    description: "Validates skills and competencies to be a proficient junior programmer writing scripts in C# to create interactive experiences with the Unity Editor.",
     year: "2024",
-    rarity: "legendary",
+    rarity: "epic",
+    imageUrl: "/badges/junior-programmer.png",
+    credentialUrl: "https://www.credly.com/badges/43f10be5-8e51-4b68-b38a-b6771cf5f3c7/linked_in_profile",
   },
   {
     id: 2,
-    title: "Unreal Engine Expert",
-    issuer: "Epic Games",
-    description: "Advanced certification in Unreal Engine development and optimization.",
-    year: "2023",
+    title: "Unity Creative Core",
+    issuer: "Unity Technologies",
+    description: "Validates core skills in creative production, including shaders, materials, lighting, animation, VFX, post-processing, and prototyping.",
+    year: "2024",
     rarity: "epic",
+    imageUrl: "/badges/creative-core.png",
+    credentialUrl: "https://www.credly.com/badges/541f6c99-7a1a-4a05-bd3f-8245adad97f0/linked_in_profile",
   },
   {
     id: 3,
-    title: "AR/VR Development Specialist",
-    issuer: "Meta",
-    description: "Specialized certification for immersive experience development.",
+    title: "Unity AR Development",
+    issuer: "Unity Technologies",
+    description: "Validates skills and competencies to be a proficient junior developer creating Mobile AR apps compatible with iOS and Android devices.",
     year: "2024",
     rarity: "legendary",
+    imageUrl: "/badges/ar-development.png",
+    credentialUrl: "https://www.credly.com/badges/114c558e-b8ad-4929-9f73-6499ea139081/linked_in_profile",
   },
   {
     id: 4,
-    title: "C# Programming Mastery",
-    issuer: "Microsoft",
-    description: "Advanced proficiency in C# programming and .NET framework.",
-    year: "2023",
-    rarity: "epic",
-  },
-  {
-    id: 5,
-    title: "Game Design Fundamentals",
-    issuer: "Coursera",
-    description: "Comprehensive understanding of game design principles and mechanics.",
-    year: "2022",
-    rarity: "rare",
-  },
-  {
-    id: 6,
-    title: "3D Modeling & Animation",
-    issuer: "Blender Foundation",
-    description: "Proficiency in 3D modeling, rigging, and animation using Blender.",
-    year: "2023",
-    rarity: "epic",
+    title: "Unity VR Development",
+    issuer: "Unity Technologies",
+    description: "Validates skills and competencies to be a proficient junior developer creating VR experiences and working in the VR industry.",
+    year: "2024",
+    rarity: "legendary",
+    imageUrl: "/badges/vr-development.png",
+    credentialUrl: "https://www.credly.com/badges/d57dc371-2148-4ede-b4b5-9dd574d03988/linked_in_profile",
   },
 ]
 
@@ -100,8 +92,16 @@ function CertificationCard({ cert, index, isVisible }: { cert: typeof certificat
         {/* Icon and rarity */}
         <div className="flex items-start justify-between mb-4">
           <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${rarity.gradient} p-0.5`}>
-            <div className="w-full h-full bg-card rounded-[6px] flex items-center justify-center">
-              <span className="text-3xl">{rarity.icon}</span>
+            <div className="w-full h-full bg-card rounded-[6px] flex items-center justify-center overflow-hidden p-1">
+              {cert.imageUrl ? (
+                <img 
+                  src={cert.imageUrl} 
+                  alt={cert.title} 
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <span className="text-3xl">{rarity.icon}</span>
+              )}
             </div>
           </div>
           <div className="flex flex-col items-end gap-2">
@@ -125,9 +125,21 @@ function CertificationCard({ cert, index, isVisible }: { cert: typeof certificat
         </p>
 
         {/* Achievement unlock text */}
-        <div className="mt-4 pt-4 border-t border-border/50 flex items-center gap-2 text-xs text-muted-foreground">
-          <Award className="w-4 h-4 text-primary" />
-          <span className="font-mono">ACHIEVEMENT UNLOCKED</span>
+        <div className="mt-4 pt-4 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Award className="w-4 h-4 text-primary" />
+            <span className="font-mono">ACHIEVEMENT UNLOCKED</span>
+          </div>
+          {cert.credentialUrl && (
+            <a 
+              href={cert.credentialUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-primary hover:underline font-mono flex items-center gap-1 transition-colors hover:text-primary-foreground"
+            >
+              Verify ↗
+            </a>
+          )}
         </div>
       </CardContent>
     </Card>
@@ -180,8 +192,8 @@ export function CertificationsSection() {
         <div className={`flex justify-center gap-8 mb-12 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           {[
             { count: 2, label: "Legendary", color: "text-yellow-500" },
-            { count: 3, label: "Epic", color: "text-purple-500" },
-            { count: 1, label: "Rare", color: "text-blue-500" },
+            { count: 2, label: "Epic", color: "text-purple-500" },
+            { count: 0, label: "Rare", color: "text-blue-500" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
@@ -191,7 +203,7 @@ export function CertificationsSection() {
         </div>
 
         {/* Certification cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {certifications.map((cert, i) => (
             <CertificationCard key={cert.id} cert={cert} index={i} isVisible={isVisible} />
           ))}
@@ -202,12 +214,12 @@ export function CertificationsSection() {
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/30 backdrop-blur-sm border border-primary/30 rounded-full">
             <Star className="w-5 h-5 text-yellow-500" />
             <span className="font-mono text-foreground">
-              <span className="text-primary font-bold">{certifications.length}/50</span> Achievements Unlocked
+              <span className="text-primary font-bold">{certifications.length}/10</span> Achievements Unlocked
             </span>
             <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-primary to-neon-cyan rounded-full"
-                style={{ width: isVisible ? "12%" : "0%", transition: "width 1s ease-out" }}
+                style={{ width: isVisible ? `${(certifications.length / 10) * 100}%` : "0%", transition: "width 1s ease-out" }}
               />
             </div>
           </div>

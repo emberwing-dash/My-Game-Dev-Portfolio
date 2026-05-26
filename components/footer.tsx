@@ -17,13 +17,13 @@ export function Footer() {
 
           {/* Navigation */}
           <nav className="flex flex-wrap justify-center gap-6">
-            {["Home", "About", "Projects", "Certifications", "Contact"].map((item) => (
+            {["Home", "About", "Projects", "Certifications", "Achievements", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
               >
-                {item}
+                {item === "About" ? "About Me" : item === "Contact" ? "Contact Me" : item}
               </a>
             ))}
           </nav>
@@ -31,7 +31,7 @@ export function Footer() {
           {/* Social links */}
           <div className="flex items-center gap-4">
             <a 
-              href="https://github.com" 
+              href="https://github.com/emberwing-dash" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"
@@ -39,7 +39,7 @@ export function Footer() {
               <Github className="w-5 h-5" />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/rishav-goswami-279789354/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"
@@ -47,7 +47,9 @@ export function Footer() {
               <Linkedin className="w-5 h-5" />
             </a>
             <a 
-              href="mailto:gamedev@example.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=goswamirishav520@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"
             >
               <Mail className="w-5 h-5" />
